@@ -8,11 +8,10 @@ on:
     branches:
       - main
       
-   
 jobs:
   build:
     runs-on: ubuntu-latest
-  
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -38,3 +37,16 @@ jobs:
 
     - name: Logout from Docker Hub
       run: docker logout
+
+  deploy:
+    needs: build
+    runs-on: aws-ec2
+    steps:
+    - name: pull image from docker hub
+      run: docker pull hornet55/github_actions:9241658983_2
+
+    - name: Delete old container
+      run: docker rm -f reactcontainer
+
+    - name: Run docker container
+      run: docker run -d -p 3000:80 --name reactcontainer hornet55/github_actions:9241658983_2
