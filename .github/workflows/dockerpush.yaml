@@ -12,8 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    secrets: inherit
-
+  
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -33,8 +32,8 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        username: hornet55
+        password: dckr_pat_r9vnTvHkkZpKWEuRIvyoTrZoJ4
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
