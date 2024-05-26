@@ -34,7 +34,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: hornet55/github_actions:latest
+        tags: hornet55/github_actions:${{ github.run_id }}
 
     - name: Logout from Docker Hub
       run: docker logout
