@@ -22,40 +22,24 @@ jobs:
     - name: Display Docker Version
       run: docker --version
 
-    - name: Print Environment Variables
-      run: printenv
+    - name: Manually set Docker Hub Username (Test)
+      run: echo "your-docker-hub-username"
 
-    - name: Check if DOCKER_HUB_USERNAME secret is set
-      run: |
-        if [ -z "${{ secrets.DOCKER_HUB_USERNAME }}" ]; then
-          echo "DOCKER_HUB_USERNAME is not set"
-        else
-          echo "DOCKER_HUB_USERNAME is set"
-        fi
-
-    - name: Print Docker Hub Username
-      run: echo "${{ secrets.DOCKER_HUB_USERNAME }}"
-
-    - name: Check if DOCKER_HUB_ACCESS_TOKEN secret is set
-      run: |
-        if [ -z "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" ]; then
-          echo "DOCKER_HUB_ACCESS_TOKEN is not set"
-        else
-          echo "DOCKER_HUB_ACCESS_TOKEN is set"
-        fi
+    - name: Manually set Docker Hub Access Token (Test)
+      run: echo "your-docker-hub-access-token"
 
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        username: hornet55
+        password: dckr_pat_r9vnTvHkkZpKWEuRIvyoTrZoJ4Q
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-image:latest
+        tags: your-docker-hub-username/my-image:latest
 
     - name: Logout from Docker Hub
       run: docker logout
